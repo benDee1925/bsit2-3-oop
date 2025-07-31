@@ -1,9 +1,21 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
+import java.util.Scanner;
+
+public class TotalNumbers {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.println("Test Branch");
+        Scanner input = new Scanner(System.in);
+
+        int totalNumber = 0; 
+
+        
+        for (int i = 1; i <= 5; i++) {
+            System.out.print("Enter number " + i + ": ");
+            int number = input.nextInt();
+            totalNumber += number;       
+        }
+
+       
+        System.out.println("\nTotal Number: " + totalNumber);
+
+        input.close();
     }
 }
