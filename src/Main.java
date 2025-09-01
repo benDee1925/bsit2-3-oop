@@ -1,38 +1,22 @@
-public static void main(String[] args) {
-        PostManager pm = new PostManager();
+public class Main {
+    public static void main(String[] args) {
+        BankAccount.displayBankInfo();
+        System.out.println();
 
-        System.out.println("═══ Social Media Post Manager ═══");
+        BankAccount account1 = new BankAccount("John Doe", 1000.0);
+        BankAccount account2 = new BankAccount("Jane Smith", 2500.0);
+        BankAccount account3 = new BankAccount("Bob Johnson", 500.0);
 
-        
-        String postTitle = "Java Programming Tips";
-        int engagementScore = pm.calculateEngagement(150, 75, 25);
-        String category = pm.getCategoryRating(engagementScore);
+        System.out.println("\n==== Account Operations ====");
+        account1.deposit(500.0);
+        account2.withdraw(300.0);
 
-        pm.displayPostStats(postTitle, engagementScore, category);
-
-      
-        String[] hashtags = {"#java", "#coding", "#programming", "#java", "#tips"};
-        ArrayList<String> uniqueHashtags = pm.manageHashtags(hashtags);
-
-        
-        ArrayList<String> posts = new ArrayList<>();
-        posts.add("Java Programming Tips");
-        posts.add("Spring Boot Guide");
-        posts.add("Advanced Java Tutorial");
-
-        HashMap<String, Integer> postEngagement = new HashMap<>();
-        postEngagement.put("Java Programming Tips", engagementScore);
-        postEngagement.put("Spring Boot Guide", 800);
-        postEngagement.put("Advanced Java Tutorial", 1200);
-
-        LinkedList<String> trendingPosts = pm.findTrendingPosts(posts, postEngagement);
-
-        
-        HashSet<String> uniqueAuthors = pm.getUniqueAuthors("Alice", "Bob", "Alice", "Charlie", "Bob");
+        System.out.println("\n==== Interest Calculation ====");
+        System.out.println(account1.getAccountHolderName() + "'s interest: $" + account1.calculateInterest());
+        System.out.println(account2.getAccountHolderName() + "'s interest: $" + account2.calculateInterest());
+        System.out.println(account3.getAccountHolderName() + "'s interest: $" + account3.calculateInterest());
 
         System.out.println();
-        System.out.println("Unique Hashtags: " + uniqueHashtags);
-        System.out.println("Trending Posts: " + trendingPosts);
-        System.out.println("Unique Authors: " + uniqueAuthors);
+        BankAccount.displayTotalAccounts();
     }
 }
