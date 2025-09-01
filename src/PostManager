@@ -1,86 +1,56 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.HashSet;
+class BankAccount {
+    private static String bankName = "Liceo Bank";
+    private static int totalAccounts = 0;
+    private static double interestRate = 0.03; // 3%
 
-public class PostManager {
 
-    
-    public int calculateEngagement(int... interactions) {
-        if (interactions == null || interactions.length == 0) {
-            return 0;
-        }
-        int total = 0;
-        for (int i = 0; i < interactions.length; i++) {
-            total += interactions[i];
-        }
-        return total;
+    private String accountNumber;
+    private String accountHolderName;
+    private double balance;
+
+    public BankAccount(String accountHolderName, double initialBalance) {
+        this.accountHolderName = accountHolderName;
+        this.balance = initialBalance;
+        this.accountNumber = generateAccountNumber();
+        totalAccounts++;
+        System.out.println("Account Created: " + accountNumber + " for " + accountHolderName + " with initial balance: $" + balance);
     }
 
-    
-    public String getCategoryRating(int engagementScore) {
-        if (engagementScore >= 1000) {
-            return "Viral";
-        } else if (engagementScore >= 500) {
-            return "Popular";
-        } else if (engagementScore >= 100) {
-            return "Good";
-        } else if (engagementScore >= 50) {
-            return "Low";
+
+    private static String generateAccountNumber() {
+        return "ACC" + String.format("%03d", totalAccounts + 1);
+    }
+
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println(accountHolderName + " deposited $" + amount + ". New balance: $" + balance);
+        }
+    }
+
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            System.out.println(accountHolderName + " withdrew $" + amount + ". New balance: $" + balance);
         } else {
-            return "Poor";
+            System.out.println("Insufficient balance for " + accountHolderName);
         }
     }
 
-    
-    public void displayPostStats(String postTitle, int engagementScore) {
-        System.out.println("Post: " + postTitle);
-        System.out.println("Engagement Score: " + engagementScore);
+    public double calculateInterest() {
+        return balance * interestRate;
     }
 
-    public void displayPostStats(String postTitle, int engagementScore, String category) {
-        System.out.println("Post: " + postTitle);
-        System.out.println("Engagement Score: " + engagementScore);
-        System.out.println("Category: " + category);
+    public static void displayBankInfo() {
+        System.out.println("Bank Name: " + bankName);
+        System.out.println("Interest Rate: " + (interestRate * 100) + "%");
     }
 
-    
-    public ArrayList<String> manageHashtags(String[] hashtags) {
-        String[] fixedHashtags = new String[5];
-        for (int i = 0; i < fixedHashtags.length && i < hashtags.length; i++) {
-            fixedHashtags[i] = hashtags[i];
-        }
-
-        ArrayList<String> uniqueList = new ArrayList<>();
-        for (int i = 0; i < fixedHashtags.length; i++) {
-            String tag = fixedHashtags[i];
-            if (tag != null && !uniqueList.contains(tag)) {
-                uniqueList.add(tag);
-            }
-        }
-        return uniqueList;
+    public static void displayTotalAccounts() {
+        System.out.println("Total Accounts Created: " + totalAccounts);
     }
 
-    
-    public LinkedList<String> findTrendingPosts(ArrayList<String> posts, HashMap<String, Integer> postEngagement) {
-        LinkedList<String> trending = new LinkedList<>();
-
-        for (int i = 0; i < posts.size(); i++) {
-            String post = posts.get(i);
-            int score = postEngagement.get(post);
-            if (score > 500) {
-                trending.add(post);
-            }
-        }
-        return trending;
+    public String getAccountHolderName() {
+        return accountHolderName;
     }
-
-    
-    public HashSet<String> getUniqueAuthors(String... authors) {
-        HashSet<String> uniqueAuthors = new HashSet<>();
-        for (int i = 0; i < authors.length; i++) {
-            uniqueAuthors.add(authors[i]);
-        }
-        return uniqueAuthors;
-    }
-
+}
