@@ -1,9 +1,24 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.println("Test Branch");
+        Manager manager = new Manager("Alice Smith", 2001, 80000, "Engineering", 15000, 8);
+        Developer developer = new Developer("Bob Johnson", 2002, 70000, "Engineering", "Java", 5);
+        Intern intern = new Intern("Charlie Brown", 2003, 30000, "Engineering", "Tech University", true);
+
+        System.out.println("\n--- Employee Details and Work ---\n");
+
+        manager.displayInfo();
+        manager.work();
+        System.out.println("Salary: " + manager.calculateSalary());
+        System.out.println();
+
+        developer.displayInfo();
+        developer.work();
+        System.out.println("Salary: " + developer.calculateSalary());
+        System.out.println();
+
+        intern.displayInfo();
+        intern.work();
+        System.out.println("Salary: " + intern.calculateSalary());
+        System.out.println();
     }
 }
