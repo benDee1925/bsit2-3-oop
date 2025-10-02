@@ -22,7 +22,7 @@ public class Main {
         manager.displayAllItems();
         System.out.println();
 
-       
+      
         Student student = new Student("U001", "John Smith", "john.smith@email.com", "S123", "Computer Science");
         Faculty faculty = new Faculty("U002", "Dr. Smith", "dr.smith@email.com", "Engineering", "Professor");
 
