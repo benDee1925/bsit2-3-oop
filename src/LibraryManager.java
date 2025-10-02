@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 class LibraryManager {
     private ArrayList<Borrowable> items;
 
@@ -7,14 +8,9 @@ class LibraryManager {
 
     public void addItem(Borrowable item) {
         items.add(item);
-        if (item instanceof LibraryItem) {
-            LibraryItem libItem = (LibraryItem) item;
-            System.out.println("Added: " + libItem.getItemType() + " - " + libItem.title + " by " + libItem.author);
-        }
     }
 
-    public void displayAllItems() {
-        System.out.println("=== Displaying All Items ===");
+  public void displayAllItems() {
         for (Borrowable item : items) {
             if (item instanceof LibraryItem) {
                 LibraryItem libItem = (LibraryItem) item;
@@ -32,13 +28,13 @@ class LibraryManager {
                         item.borrowItem(borrowerName);
                         System.out.println(borrowerName + " borrowed: " + libItem.title);
                     } else {
-                        System.out.println(libItem.title + " is currently not available.");
+                        System.out.println("Item is already borrowed.");
                     }
                     return;
                 }
             }
         }
-        System.out.println("Item with ID " + itemId + " not found.");
+        System.out.println("Item not found.");
     }
 
     public void returnItem(String itemId) {
@@ -48,19 +44,18 @@ class LibraryManager {
                 if (libItem.itemId.equals(itemId)) {
                     if (!item.isAvailable()) {
                         item.returnItem();
-                        System.out.println(libItem.title + " has been returned.");
+                        System.out.println("Item returned: " + libItem.title);
                     } else {
-                        System.out.println(libItem.title + " was not checked out.");
+                        System.out.println("Item is already available.");
                     }
                     return;
                 }
             }
         }
-        System.out.println("Item with ID " + itemId + " not found.");
+        System.out.println("Item not found.");
     }
 
     public void displayAvailableItems() {
-        System.out.println("=== Displaying Available Items ===");
         for (Borrowable item : items) {
             if (item.isAvailable() && item instanceof LibraryItem) {
                 LibraryItem libItem = (LibraryItem) item;
@@ -72,20 +67,10 @@ class LibraryManager {
     public double calculateTotalLateFees(int daysLate) {
         double total = 0;
         for (Borrowable item : items) {
-            total += ((LibraryItem) item).calculateLateFee(daysLate);
-        }
-        return total;
-    }
-
-    public LibraryItem findItemById(String itemId) {
-        for (Borrowable item : items) {
-            if (item instanceof LibraryItem) {
-                LibraryItem libItem = (LibraryItem) item;
-                if (libItem.itemId.equals(itemId)) {
-                    return libItem;
-                }
+            if (!item.isAvailable() && item instanceof LibraryItem) {
+                total += ((LibraryItem) item).calculateLateFee(daysLate);
             }
         }
-        return null;
+        return total;
     }
 }
