@@ -48,7 +48,7 @@ class DVD extends LibraryItem implements Borrowable {
         return daysLate * 1.00;
     }
 
-    // Implement Borrowable
+   
     @Override
     public void borrowItem(String borrowerName) {
         checkOut(borrowerName);
