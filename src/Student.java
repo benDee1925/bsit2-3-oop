@@ -8,10 +8,6 @@ class Student extends User {
         this.major = major;
     }
 
-    public String getStudentId() { return studentId; }
-    public String getMajor() { return major; }
-
-    @Override
     public int getMaxBorrowLimit() {
         return 5;
     }
