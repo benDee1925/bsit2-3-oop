@@ -10,7 +10,7 @@ class Book extends LibraryItem implements Borrowable {
         setGenre(genre);
     }
 
-    // Getters
+ 
     public String getIsbn() { return isbn; }
     public int getNumberOfPages() { return numberOfPages; }
     public String getGenre() { return genre; }
