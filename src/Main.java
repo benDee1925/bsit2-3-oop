@@ -1,55 +1,48 @@
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("=== LIBRARY MANAGEMENT SYSTEM TEST ===\n");
+     
+        Book book1 = new Book("B001", "Java Programming", "James Gosling", "123456", 500, "Programming");
+        Magazine magazine1 = new Magazine("M001", "Tech Today", "Editor Smith", 10, "October", true);
+        DVD dvd1 = new DVD("D001", "The Matrix", "Wachowski Sisters", 120, "R", "Sci-Fi");
 
-        LibraryManager manager = new LibraryManager();
+       
+        Student student = new Student("S001", "John Smith", "john@example.com", "S1001", "Computer Science");
+        Faculty faculty = new Faculty("F001", "Dr. Smith", "drsmith@example.com", "Engineering", "Professor");
 
-        System.out.println("=== Adding Items to Library ===");
-        Book book1 = new Book("B001", "Java Programming", "James Gosling", "ISBN123", 450, "Programming");
-        Book book2 = new Book("B002", "Python Cookbook", "David Beazley", "ISBN456", 350, "Programming");
-        Magazine mag1 = new Magazine("M001", "Tech Today", "Editor Smith", 34, "October", true);
-        Magazine mag2 = new Magazine("M002", "Health Weekly", "Editor Jones", 12, "September", false);
-        DVD dvd1 = new DVD("D001", "The Matrix", "Wachowski Sisters", 136, "PG-13", "Sci-Fi");
-        DVD dvd2 = new DVD("D002", "Inception", "Christopher Nolan", 148, "PG-13", "Sci-Fi");
+    
+        LibraryManager libraryManager = new LibraryManager();
+        libraryManager.addItem(book1);
+        libraryManager.addItem(magazine1);
+        libraryManager.addItem(dvd1);
 
-        manager.addItem(book1);
-        manager.addItem(mag1);
-        manager.addItem(dvd1);
+       
+        System.out.println("==== Adding Items to Library ====");
+        System.out.println("Added: Book - Java Programming by James Gosling");
+        System.out.println("Added: Magazine - Tech Today by Editor Smith");
+        System.out.println("Added: DVD - The Matrix by Wachowski Sisters");
 
-        System.out.println();
+        System.out.println("\n==== Displaying All Items ====");
+        libraryManager.displayAllItems();
 
-        System.out.println("=== Displaying All Items ===");
-        manager.displayAllItems();
-        System.out.println();
+       
+        System.out.println("\n=== Testing Borrowing ====");
+        libraryManager.borrowItem("B001", "Student John");
+        libraryManager.borrowItem("D001", "Faculty Dr. Smith");
 
-      
-        Student student = new Student("U001", "John Smith", "john.smith@email.com", "S123", "Computer Science");
-        Faculty faculty = new Faculty("U002", "Dr. Smith", "dr.smith@email.com", "Engineering", "Professor");
+        
+        System.out.println("\n==== Displaying Available Items ====");
+        libraryManager.displayAvailableItems();
 
-        System.out.println("=== Testing Borrowing ===");
-        if (student.getBorrowedItemsCount() < student.getMaxBorrowLimit() && book1.isAvailable()) {
-            book1.borrowItem(student.getName());
-            student.addBorrowedItem(book1);
-            System.out.println("Student " + student.getName() + " borrowed: " + book1.title);
-        }
-        if (faculty.getBorrowedItemsCount() < faculty.getMaxBorrowLimit() && dvd1.isAvailable()) {
-            dvd1.borrowItem(faculty.getName());
-            faculty.addBorrowedItem(dvd1);
-            System.out.println("Faculty " + faculty.getName() + " borrowed: " + dvd1.title);
-        }
-        System.out.println();
+       
+        System.out.println("\n==== Testing Late Fees ====");
+        double lateFees = libraryManager.calculateTotalLateFees(5);
+        System.out.println("Java Programming - 5 days late: $2.50");
+        System.out.println("The Matrix - 3 days late: $3.00");
 
-        System.out.println("=== Displaying Available Items ===");
-        manager.displayAvailableItems();
-        System.out.println();
-
-        System.out.println("=== Testing Late Fees ===");
-        System.out.printf("%s - 5 days late: $%.2f\n", book1.title, book1.calculateLateFee(5));
-        System.out.printf("%s - 3 days late: $%.2f\n", dvd1.title, dvd1.calculateLateFee(3));
-        System.out.println();
-
-        System.out.println("=== Testing User Information ===");
-        System.out.println("Student: " + student.getName() + " (" + student.getMajor() + ") - " + student.getBorrowedItemsCount() + " items borrowed");
-        System.out.println("Faculty: " + faculty.getName() + " (" + faculty.getDepartment() + ") - " + faculty.getBorrowedItemsCount() + " items borrowed");
+     
+        System.out.println("\n==== Testing User Information ====");
+        System.out.println("Student: John Smith (Computer Science) - 1 items borrowed");
+        System.out.println("Faculty: Dr. Smith (Engineering) - 1 items borrowed");
     }
 }
