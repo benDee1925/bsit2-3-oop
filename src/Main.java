@@ -1,9 +1,22 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.println("Test Branch");
+        BankAccount.displayBankInfo();
+        System.out.println();
+
+        BankAccount account1 = new BankAccount("John Doe", 1000.0);
+        BankAccount account2 = new BankAccount("Jane Smith", 2500.0);
+        BankAccount account3 = new BankAccount("Bob Johnson", 500.0);
+
+        System.out.println("\n==== Account Operations ====");
+        account1.deposit(500.0);
+        account2.withdraw(300.0);
+
+        System.out.println("\n==== Interest Calculation ====");
+        System.out.println(account1.getAccountHolderName() + "'s interest: $" + account1.calculateInterest());
+        System.out.println(account2.getAccountHolderName() + "'s interest: $" + account2.calculateInterest());
+        System.out.println(account3.getAccountHolderName() + "'s interest: $" + account3.calculateInterest());
+
+        System.out.println();
+        BankAccount.displayTotalAccounts();
     }
 }
